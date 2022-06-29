@@ -1,4 +1,4 @@
-package com.sparta.sortingalgorithms;
+package com.sparta.sortmanager;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

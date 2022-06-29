@@ -1,4 +1,4 @@
-package com.sparta.sortingalgorithms;
+package com.sparta.sortmanager;
 
 public class BubbleSort implements Sorter {
 
