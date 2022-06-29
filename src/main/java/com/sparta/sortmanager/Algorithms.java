@@ -1,10 +1,11 @@
 package com.sparta.sortmanager;
 
-import java.util.Arrays;
-
+/**
+ * In order to update program functionality add new enum
+ * containing name and class object.
+ */
 public enum Algorithms {
-    BUBBLE_SORT("Bubble Sort", new BubbleSort()),
-    RADIX_SORT("Radix Sort", new BubbleSort());
+    BUBBLE_SORT("Bubble Sort", new BubbleSort());
 
     private final String name;
     private final Object sortClass;

@@ -31,24 +31,24 @@ public class SortHandler {
     }
 
     public void fillArray(){
+        // TODO inform user of filling array.
         Random rand = new Random();
         for (int i = 0; i < unsortedArray.length; i++)
             unsortedArray[i] = rand.nextInt(99999);
     }
 
     public void sortArray(){
+        // TODO inform user of working on array sorting.
         long startTime = System.nanoTime();
         sortedArray = sortingAlgorithm.getSorter().sortArray(unsortedArray);
         long endTime = System.nanoTime();
         timeTakenToComplete = (endTime - startTime);
     }
 
-    @Override
-    public String toString() {
-        return "SortHandler{" +
-               "unsortedArray=" + Arrays.toString(unsortedArray) +
-               ", sortedArray=" + Arrays.toString(sortedArray) +
-               ", timeTakenToComplete=" + getTimeTakenToCompleteInMillis() +
-               "ms}";
+    public void outputData(){
+        System.out.println("\nSorting Algorithm Results for " + sortingAlgorithm.getName());
+        System.out.println("Unsorted Array : " + Arrays.toString(unsortedArray));
+        System.out.println("Sorted Array   : " + Arrays.toString(sortedArray));
+        System.out.println("Time Taken : " + getTimeTakenToCompleteInMillis() + "ms");
     }
 }

@@ -20,35 +20,51 @@ public class UserInterface {
         return arraySize;
     }
 
-    public static void start(){
+    public static void setup(){
         displayAlgorithms();
         getAlgorithmChoice();
         getArraySizeFromUser();
     }
 
     public static void title(){
-        System.out.println(PROGRAM_TITLE);
+        System.err.println(PROGRAM_TITLE);
+    }
+
+    public static void informUserOfArrayFilling(){
+        System.out.println("\nRandomly filling array with " + arraySize + " integers.");
+    }
+
+    public static void informUserOfArraySorting(){
+        System.out.println("\nWorking on sorting the array... ( This could take a while! )");
     }
 
     private static void displayAlgorithms(){
-        System.out.println("Select a sorting algorithm...");
+        System.out.println("\nSelect a sorting algorithm...");
         for (Algorithms algo: algoEnumValues) {
             System.out.println("(" + algo.ordinal() + ") : " + algo.getName());
         }
     }
 
-    private static void getAlgorithmChoice(){
-        do{ // FIXME formatting bug
-            System.out.println("> ");
+    public static boolean doesUserWantToContinue(){
+        while (true) {
+            System.out.print("\nWould you like to continue? (y)es or (n)o?\n> ");
             String userInput = inputScanner.nextLine();
-            if(validInt(userInput)){
+            if(userInput.equals("y")) return true;
+            if(userInput.equals("n")) return false;
+        }
+    }
+
+    private static void getAlgorithmChoice(){
+        do{
+            System.out.print("> ");
+            String userInput = inputScanner.nextLine();
+            if(validInt(userInput) && userInput.length() <= algoEnumValues.length){
                 int validated = Integer.parseInt(userInput);
                 if(validated >= algoEnumValues[0].ordinal() && validated <= algoEnumValues[algoEnumValues.length - 1].ordinal()){
                     userAlgorithmChoice = algoEnumValues[validated];
                     break;
-                } else System.err.println("Invalid Selection1!");
-            }else System.err.println("Invalid Selection2!");
-
+                } else System.out.println("Invalid Selection!");
+            }else System.out.println("Invalid Selection!");
         }while(true);
     }
 
@@ -63,21 +79,23 @@ public class UserInterface {
     }
 
     private static void getArraySizeFromUser(){
-        System.out.println("Please enter the size of the array.");
+        System.out.println("\nPlease enter the size of the array.");
         do{
             System.out.print("> ");
             String userInput = inputScanner.nextLine();
-            if(validInt(userInput)){
+            if(validInt(userInput) && userInput.length() <= 10){
                 int validated = Integer.parseInt(userInput);
                 if(validated >= 4 && validated <= Integer.MAX_VALUE - 4) {
                     arraySize = validated;
                     break;
                 } else {
-                    System.err.println("Array size is invalid!");
+                    System.out.println("Array size is invalid!");
                 }
             } else {
-                System.err.println("Please enter a number!");
+                System.out.println("Please enter a valid number!");
             }
         }while(true);
     }
+
+
 }
