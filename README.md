@@ -1,4 +1,4 @@
-# Sorting Algorithms
+# Sort Manager
 
 For practice during our course and for deeper understanding. Algorithms are written and tested using datasets to ensure correct implementation.
 
