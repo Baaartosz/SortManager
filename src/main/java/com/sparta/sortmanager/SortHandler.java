@@ -31,14 +31,12 @@ public class SortHandler {
     }
 
     public void fillArray(){
-        // TODO inform user of filling array.
         Random rand = new Random();
         for (int i = 0; i < unsortedArray.length; i++)
             unsortedArray[i] = rand.nextInt(99999);
     }
 
     public void sortArray(){
-        // TODO inform user of working on array sorting.
         long startTime = System.nanoTime();
         sortedArray = sortingAlgorithm.getSorter().sortArray(unsortedArray);
         long endTime = System.nanoTime();
