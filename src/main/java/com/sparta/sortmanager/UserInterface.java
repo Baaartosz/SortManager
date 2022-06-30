@@ -27,7 +27,7 @@ public class UserInterface {
     }
 
     public static void title(){
-        System.err.println(PROGRAM_TITLE);
+        System.out.println(PROGRAM_TITLE);
     }
 
     public static void informUserOfArrayFilling(){
@@ -89,13 +89,12 @@ public class UserInterface {
                     arraySize = validated;
                     break;
                 } else {
-                    System.out.println("Array size is invalid!");
+                    System.out.println("Array size is invalid! (Enter a number above or equal to 4)");
                 }
             } else {
-                System.out.println("Please enter a valid number!");
+                System.out.println("Array size is invalid! (Enter a number above or equal to 4)");
             }
         }while(true);
     }
-
 
 }

@@ -9,16 +9,7 @@ public class SortHandler {
 
     private int[] unsortedArray;
     private int[] sortedArray;
-
     private long timeTakenToComplete;
-
-    public int[] getUnsortedArray() {
-        return unsortedArray;
-    }
-
-    public int[] getSortedArray() {
-        return sortedArray;
-    }
 
     public float getTimeTakenToCompleteInMillis() {
         return (float)timeTakenToComplete / 1000000;
@@ -38,7 +29,7 @@ public class SortHandler {
 
     public void sortArray(){
         long startTime = System.nanoTime();
-        sortedArray = sortingAlgorithm.getSorter().sortArray(unsortedArray);
+        sortedArray = sortingAlgorithm.getSorter().sortArray(unsortedArray.clone());
         long endTime = System.nanoTime();
         timeTakenToComplete = (endTime - startTime);
     }

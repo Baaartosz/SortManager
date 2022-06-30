@@ -13,7 +13,9 @@ package com.sparta.sortmanager;
 
 /*
  * TODO output to console in a cleaner format --> Could output to log file?
- * TODO create a SortManager class which handles code below.
+ * TODO create a SortManagerApp class which handles code below.
+ * TODO create a Timer Class which will time the process of sorting ?
+ * TODO create a method which will decide best choice for displaying time, minutes, seconds ,milliseconds.
  */
 
 public class Main {
@@ -29,7 +31,6 @@ public class Main {
 
             UserInterface.informUserOfArraySorting();
             s.sortArray();
-
             s.outputData();
 
         } while(UserInterface.doesUserWantToContinue());
