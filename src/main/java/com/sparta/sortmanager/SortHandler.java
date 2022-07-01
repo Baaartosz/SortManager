@@ -6,7 +6,6 @@ import java.util.Random;
 public class SortHandler {
 
     private Algorithms sortingAlgorithm;
-
     private int[] unsortedArray;
     private int[] sortedArray;
     private long timeTakenToComplete;

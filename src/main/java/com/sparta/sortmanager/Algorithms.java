@@ -1,26 +1,56 @@
 package com.sparta.sortmanager;
 
 /**
- * In order to update program functionality add new enum
- * containing name and class object.
+ * Enum Factory Pattern
  */
 public enum Algorithms {
-    BUBBLE_SORT("Bubble Sort", new BubbleSort());
+    BUBBLE_SORT("Bubble Sort") {
+        @Override
+        public Sorter getSorter(){
+            return new BubbleSort();
+        }
+    },
+    BINARY_SORT("Binary Sort (Not Implemented)") {
+        @Override
+        public Sorter getSorter() { return new BinarySort(); }
+    },
+    MERGE_SORT("Merge Sort (Not Implemented)") {
+        @Override
+        public Sorter getSorter(){
+            return new QuickSort();
+        }
+    },
+    QUICK_SORT("Quick Sort (Not Implemented)") {
+        @Override
+        public Sorter getSorter(){
+            return new QuickSort();
+        }
+    },
+    INSERTION_SORT("Insertion Sort (Not Implemented)") {
+        @Override
+        public Sorter getSorter(){
+            return new InsertionSort();
+        }
+    };
 
-    private final String name;
-    private final Object sortClass;
-    Algorithms(String name, Object sortClass) {
-        this.name = name;
-        this.sortClass = sortClass;
-    }
+    /*
+     * DONE Bubble Sort
+     * TODO Binary Sort
+     * TODO Insertion Sort
+     * TODO Merge Sort
+     * TODO Quick Sort
+     */
+
+    private String name;
 
     public String getName() {
         return name;
     }
 
-    public Sorter getSorter(){
-        Sorter s = (Sorter) sortClass;
-        return s;
+    Algorithms(String algoName) {
+        name = algoName;
     }
+
+    public abstract Sorter getSorter();
 }
 
