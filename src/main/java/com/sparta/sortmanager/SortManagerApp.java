@@ -16,7 +16,7 @@ public class SortManagerApp {
 
             ui.informUserOfArraySorting();
             s.sortArray();
-            s.outputData();
+            s.outputData(true);
 
         } while(ui.doesUserWantToContinue());
     }

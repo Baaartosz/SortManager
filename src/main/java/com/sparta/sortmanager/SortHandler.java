@@ -27,10 +27,30 @@ public class SortHandler{
         performanceTimer.end();
     }
 
-    public void outputData(){
+    public void outputData(boolean truncated){
         System.out.println("\nSorting Algorithm Results for " + sortingAlgorithm.getName());
-        System.out.println("Unsorted Array : " + Arrays.toString(unsortedArray));
-        System.out.println("Sorted Array   : " + Arrays.toString(sortedArray));
+        System.out.println("Unsorted Array : " + displayArray(unsortedArray, truncated));
+        System.out.println("Sorted Array   : " + displayArray(sortedArray, truncated));
         System.out.println("Time Taken : " + performanceTimer.getTimeTaken());
     }
+
+    private String displayArray(int[] array, boolean truncated){
+        if(!truncated) return Arrays.toString(array) + " Size(" + array.length + ")";
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[ ");
+
+        for (int i = 0; i < 5; i++) {
+            stringBuilder.append(array[i]).append(", ");
+        }
+        stringBuilder.append("..., ..., ");
+
+        for (int i = array.length - 5; i < array.length; i++) {
+            stringBuilder.append(array[i]).append(", ");
+        }
+        stringBuilder.append(" ] Size(").append(array.length).append(")");
+
+        return stringBuilder.toString();
+    }
+
 }
