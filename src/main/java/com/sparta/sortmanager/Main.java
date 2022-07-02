@@ -20,20 +20,6 @@ package com.sparta.sortmanager;
 
 public class Main {
     public static void main(String[] args) {
-        UserInterface.title();
-        do{
-            UserInterface.setup();
-
-            SortHandler s = new SortHandler(UserInterface.getUserAlgorithmChoice(), UserInterface.getArraySize());
-
-            UserInterface.informUserOfArrayFilling();
-            s.fillArray();
-
-            UserInterface.informUserOfArraySorting();
-            s.sortArray();
-            s.outputData();
-
-        } while(UserInterface.doesUserWantToContinue());
-
+        SortManagerApp.start();
     }
 }
