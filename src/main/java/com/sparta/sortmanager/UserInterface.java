@@ -86,7 +86,7 @@ public class UserInterface {
             String userInput = inputScanner.nextLine();
             if(validInt(userInput) && userInput.length() <= 10){
                 int validated = Integer.parseInt(userInput);
-                if(validated >= 4 && validated <= Integer.MAX_VALUE - 4) {
+                if(validated >= 4 && validated <= Integer.MAX_VALUE/4) {
                     arraySize = validated;
                     break;
                 } else {

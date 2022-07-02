@@ -1,6 +1,6 @@
 package com.sparta.sortmanager;
 
-public class BubbleSort implements Sorter {
+public class BubbleSort implements Sorter { /// Implement a Timer interface or extend Timer?
 
     /**
      * The Simplest sorting algorithm that works by repeatedly

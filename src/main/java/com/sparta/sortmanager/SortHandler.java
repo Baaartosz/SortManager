@@ -3,16 +3,10 @@ package com.sparta.sortmanager;
 import java.util.Arrays;
 import java.util.Random;
 
-public class SortHandler {
-
+public class SortHandler extends Timer{
     private Algorithms sortingAlgorithm;
     private int[] unsortedArray;
     private int[] sortedArray;
-    private long timeTakenToComplete;
-
-    public float getTimeTakenToCompleteInMillis() {
-        return (float)timeTakenToComplete / 1000000;
-    }
 
     public SortHandler(Algorithms sortingAlgorithm, int arraySize){
         this.sortingAlgorithm = sortingAlgorithm;
@@ -27,16 +21,15 @@ public class SortHandler {
     }
 
     public void sortArray(){
-        long startTime = System.nanoTime();
+        start();
         sortedArray = sortingAlgorithm.getSorter().sortArray(unsortedArray.clone());
-        long endTime = System.nanoTime();
-        timeTakenToComplete = (endTime - startTime);
+        end();
     }
 
     public void outputData(){
         System.out.println("\nSorting Algorithm Results for " + sortingAlgorithm.getName());
         System.out.println("Unsorted Array : " + Arrays.toString(unsortedArray));
         System.out.println("Sorted Array   : " + Arrays.toString(sortedArray));
-        System.out.println("Time Taken : " + getTimeTakenToCompleteInMillis() + "ms");
+        System.out.println("Time Taken : " + getTimeTaken());
     }
 }
