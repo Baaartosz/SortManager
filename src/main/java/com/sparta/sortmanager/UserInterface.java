@@ -8,7 +8,7 @@ public class UserInterface {
 
     private Algorithms userAlgorithmChoice;
 
-    public Algorithms getUserAlgorithmChoice() {
+    public Algorithms getAlgorithmChoice() {
         return userAlgorithmChoice;
     }
 
@@ -16,12 +16,6 @@ public class UserInterface {
 
     public int getArraySize() {
         return arraySize;
-    }
-
-    public void setup(){
-        displayAlgorithms();
-        getAlgorithmChoice();
-        getArraySizeFromUser();
     }
 
     public void title(){
@@ -37,7 +31,7 @@ public class UserInterface {
         System.out.println("\nWorking on sorting the array... ( This could take a while! )");
     }
 
-    private void displayAlgorithms(){
+    public void displayAlgorithms(){
         System.out.println("\nSelect a sorting algorithm...");
         for (Algorithms algo: algoEnumValues) {
             System.out.println("(" + algo.ordinal() + ") : " + algo.getName());
@@ -53,7 +47,7 @@ public class UserInterface {
         }
     }
 
-    private void getAlgorithmChoice(){
+    public void getAlgorithmChoiceFromUser(){
         do{
             System.out.print("> ");
             String userInput = inputScanner.nextLine();
@@ -77,7 +71,7 @@ public class UserInterface {
         return true;
     }
 
-    private void getArraySizeFromUser(){
+    public void getArraySizeFromUser(){
         System.out.println("\nPlease enter the size of the array.");
         do{
             System.out.print("> ");

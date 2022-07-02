@@ -10,15 +10,15 @@ public enum Algorithms {
             return new BubbleSort();
         }
     },
+    MERGE_SORT("Merge Sort") {
+        @Override
+        public Sorter getSorter(){
+            return new MergeSort();
+        }
+    },
     BINARY_SORT("Binary Sort (Not Implemented)") {
         @Override
         public Sorter getSorter() { return new BinarySort(); }
-    },
-    MERGE_SORT("Merge Sort (Not Implemented)") {
-        @Override
-        public Sorter getSorter(){
-            return new QuickSort();
-        }
     },
     QUICK_SORT("Quick Sort (Not Implemented)") {
         @Override
@@ -37,7 +37,7 @@ public enum Algorithms {
      * DONE Bubble Sort
      * TODO Binary Sort
      * TODO Insertion Sort
-     * TODO Merge Sort
+     * DONE Merge Sort
      * TODO Quick Sort
      */
 

@@ -5,8 +5,11 @@ public class SortManagerApp {
         UserInterface ui = new UserInterface();
         ui.title();
         do{
-            ui.setup();
-            SortHandler s = new SortHandler(ui.getUserAlgorithmChoice(), ui.getArraySize());
+            ui.displayAlgorithms();
+            ui.getAlgorithmChoiceFromUser();
+            ui.getArraySizeFromUser();
+
+            SortHandler s = new SortHandler(ui.getAlgorithmChoice(), ui.getArraySize());
 
             ui.informUserOfArrayFilling();
             s.fillArray();

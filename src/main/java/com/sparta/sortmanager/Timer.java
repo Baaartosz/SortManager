@@ -1,7 +1,6 @@
 package com.sparta.sortmanager;
 
 import java.util.concurrent.TimeUnit;
-
 public class Timer {
 
     protected long timeTaken = -1;
@@ -13,9 +12,8 @@ public class Timer {
         long micro = TimeUnit.NANOSECONDS.toMicros(timeTaken);
 
         if(micro < 9999) return micro + " microsecond(s)";
-        else if(ms < 999) return ms + " miliisecond(s)";
+        else if(ms < 999) return ms + " millisecond(s)";
         return s + " second(s)";
-        //return timeTaken + " <-- no logic";
     }
 
     public void start(){
