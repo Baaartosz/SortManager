@@ -3,50 +3,48 @@ package com.sparta.sortmanager;
 import java.util.Scanner;
 
 public class UserInterface {
+    private final Scanner inputScanner = new Scanner(System.in);
+    private final Algorithms[] algoEnumValues = Algorithms.values();
 
-    // TODO class has state so convert to Object.
-    private static final String PROGRAM_TITLE = "\n   ____         __    __  ___                           \n  / __/__  ____/ /_  /  |/  /__ ____  ___ ____ ____ ____\n _\\ \\/ _ \\/ __/ __/ / /|_/ / _ `/ _ \\/ _ `/ _ `/ -_) __/\n/___/\\___/_/  \\__/ /_/  /_/\\_,_/_//_/\\_,_/\\_, /\\__/_/   \n   Developed by Bartosz                  /___/          \n";
-    private static  Scanner inputScanner = new Scanner(System.in);
-    private static Algorithms[] algoEnumValues = Algorithms.values();
+    private Algorithms userAlgorithmChoice;
 
-    private static Algorithms userAlgorithmChoice;
-
-    public static Algorithms getUserAlgorithmChoice() {
+    public Algorithms getUserAlgorithmChoice() {
         return userAlgorithmChoice;
     }
 
-    private static int arraySize;
+    private int arraySize;
 
-    public static int getArraySize() {
+    public int getArraySize() {
         return arraySize;
     }
 
-    public static void setup(){
+    public void setup(){
         displayAlgorithms();
         getAlgorithmChoice();
         getArraySizeFromUser();
     }
 
-    public static void title(){
+    public void title(){
+        String PROGRAM_TITLE = "\n   ____         __    __  ___                           \n  / __/__  ____/ /_  /  |/  /__ ____  ___ ____ ____ ____\n _\\ \\/ _ \\/ __/ __/ / /|_/ / _ `/ _ \\/ _ `/ _ `/ -_) __/\n/___/\\___/_/  \\__/ /_/  /_/\\_,_/_//_/\\_,_/\\_, /\\__/_/   \n   Developed by Bartosz                  /___/          \n";
         System.out.println(PROGRAM_TITLE);
     }
 
-    public static void informUserOfArrayFilling(){
+    public void informUserOfArrayFilling(){
         System.out.println("\nRandomly filling array with " + arraySize + " integers.");
     }
 
-    public static void informUserOfArraySorting(){
+    public void informUserOfArraySorting(){
         System.out.println("\nWorking on sorting the array... ( This could take a while! )");
     }
 
-    private static void displayAlgorithms(){
+    private void displayAlgorithms(){
         System.out.println("\nSelect a sorting algorithm...");
         for (Algorithms algo: algoEnumValues) {
             System.out.println("(" + algo.ordinal() + ") : " + algo.getName());
         }
     }
 
-    public static boolean doesUserWantToContinue(){
+    public boolean doesUserWantToContinue(){
         while (true) {
             System.out.print("\nWould you like to continue? (y)es or (n)o?\n> ");
             String userInput = inputScanner.nextLine();
@@ -55,7 +53,7 @@ public class UserInterface {
         }
     }
 
-    private static void getAlgorithmChoice(){
+    private void getAlgorithmChoice(){
         do{
             System.out.print("> ");
             String userInput = inputScanner.nextLine();
@@ -69,7 +67,7 @@ public class UserInterface {
         }while(true);
     }
 
-    private static boolean validInt(String intString){
+    private boolean validInt(String intString){
         if(intString == null || intString.length() == 0) return false;
         for(char c : intString.toCharArray()){
             if(c < '0' || c > '9'){
@@ -79,7 +77,7 @@ public class UserInterface {
         return true;
     }
 
-    private static void getArraySizeFromUser(){
+    private void getArraySizeFromUser(){
         System.out.println("\nPlease enter the size of the array.");
         do{
             System.out.print("> ");

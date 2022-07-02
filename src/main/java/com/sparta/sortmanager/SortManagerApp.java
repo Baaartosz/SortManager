@@ -2,18 +2,19 @@ package com.sparta.sortmanager;
 
 public class SortManagerApp {
     public static void start(){
-        UserInterface.title();
+        UserInterface ui = new UserInterface();
+        ui.title();
         do{
-            UserInterface.setup();
-            SortHandler s = new SortHandler(UserInterface.getUserAlgorithmChoice(), UserInterface.getArraySize());
+            ui.setup();
+            SortHandler s = new SortHandler(ui.getUserAlgorithmChoice(), ui.getArraySize());
 
-            UserInterface.informUserOfArrayFilling();
+            ui.informUserOfArrayFilling();
             s.fillArray();
 
-            UserInterface.informUserOfArraySorting();
+            ui.informUserOfArraySorting();
             s.sortArray();
             s.outputData();
 
-        } while(UserInterface.doesUserWantToContinue());
+        } while(ui.doesUserWantToContinue());
     }
 }
