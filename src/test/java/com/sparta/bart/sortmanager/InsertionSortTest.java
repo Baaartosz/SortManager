@@ -1,13 +1,14 @@
-package com.sparta.sortmanager;
+package com.sparta.bart.sortmanager;
 
+import com.sparta.bart.sortmanager.model.InsertionSort;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class BubbleTest {
+class InsertionSortTest {
 
-    BubbleSort bubbleSort;
+    InsertionSort insertionSort;
 
     int[] empty   = new int[0];
     int[] small   = new int[] {17, 28, 10, 43, 32};
@@ -19,36 +20,36 @@ class BubbleTest {
 
     @BeforeEach
     void setup(){
-        bubbleSort = new BubbleSort();
+        insertionSort = new InsertionSort();
     }
 
     @Test
     @DisplayName("null")
     void nullTest(){
-        Assertions.assertNotNull(bubbleSort.sortArray(null));
+        Assertions.assertNotNull(insertionSort.sortArray(null));
     }
 
     @Test
     @DisplayName("int[0]")
     void sortEmpty() {
-        Assertions.assertArrayEquals(new int[] {}, bubbleSort.sortArray(empty));
+        Assertions.assertArrayEquals(new int[] {-1}, insertionSort.sortArray(empty));
     }
 
     @Test
     @DisplayName("int[5]")
     void sortSmall() {
-        Assertions.assertArrayEquals(smallSorted, bubbleSort.sortArray(small));
+        Assertions.assertArrayEquals(smallSorted, insertionSort.sortArray(small));
     }
 
     @Test
     @DisplayName("int[500]")
     void sortLarge() {
-        Assertions.assertArrayEquals(largeSorted, bubbleSort.sortArray(large));
+        Assertions.assertArrayEquals(largeSorted, insertionSort.sortArray(large));
     }
 
     @Test
     @DisplayName("int[2500] ")
     void sortExtreme() {
-        Assertions.assertArrayEquals(extremeSorted, bubbleSort.sortArray(extreme));
+        Assertions.assertArrayEquals(extremeSorted, insertionSort.sortArray(extreme));
     }
 }

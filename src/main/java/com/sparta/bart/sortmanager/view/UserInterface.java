@@ -1,14 +1,18 @@
-package com.sparta.sortmanager;
+package com.sparta.bart.sortmanager.view;
 
+import com.sparta.bart.sortmanager.controller.Sorters;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
     private final Scanner inputScanner = new Scanner(System.in);
-    private final Algorithms[] algoEnumValues = Algorithms.values();
+    private final Sorters[] algoEnumValues = Sorters.values();
 
-    private Algorithms userAlgorithmChoice;
+    private Sorters userAlgorithmChoice;
 
-    public Algorithms getAlgorithmChoice() {
+    public Sorters getAlgorithmChoice() {
         return userAlgorithmChoice;
     }
 
@@ -19,7 +23,7 @@ public class UserInterface {
     }
 
     public void title(){
-        String PROGRAM_TITLE = "\n   ____         __    __  ___                           \n  / __/__  ____/ /_  /  |/  /__ ____  ___ ____ ____ ____\n _\\ \\/ _ \\/ __/ __/ / /|_/ / _ `/ _ \\/ _ `/ _ `/ -_) __/\n/___/\\___/_/  \\__/ /_/  /_/\\_,_/_//_/\\_,_/\\_, /\\__/_/   \n   Developed by Bartosz                  /___/          \n";
+        String PROGRAM_TITLE = "\n   ____         __    __  ___                           \n  / __/__  ____/ /_  /  |/  /__ ____  ___ ____ ____ ____\n _\\ \\/ _ \\/ __/ __/ / /|_/ / _ `/ _ \\/ _ `/ _ `/ -_) __/\n/___/\\___/_/  \\__/ /_/  /_/\\_,_/_//_/\\_,_/\\_, /\\__/_/   \n   Developed by Bartosz                  /___/          ";
         System.out.println(PROGRAM_TITLE);
     }
 
@@ -32,8 +36,8 @@ public class UserInterface {
     }
 
     public void displayAlgorithms(){
-        System.out.println("\nSelect a sorting algorithm...");
-        for (Algorithms algo: algoEnumValues) {
+        System.out.println("\nSelect a sorting algorithm...\nYou can select multiple by using commas between them. e.g '0,2,4'");
+        for (Sorters algo: algoEnumValues) {
             System.out.println("(" + algo.ordinal() + ") : " + algo.getName());
         }
     }
@@ -47,14 +51,51 @@ public class UserInterface {
         }
     }
 
-    public void getAlgorithmChoiceFromUser(){
+    private ArrayList<Sorters> validateIntegers(String str){
+        var safeChoices = new ArrayList<Sorters>();
+        var rejectedChoices = new ArrayList<String>();
+
+        var splitString = str.split(",");
+        for (String possibleInt: splitString) {
+            if(validInt(possibleInt) && possibleInt.length() <= algoEnumValues.length){
+                int validated = Integer.parseInt(possibleInt);
+                if(validated >= algoEnumValues[0].ordinal() && validated <= algoEnumValues[algoEnumValues.length - 1].ordinal()){
+                    safeChoices.add(algoEnumValues[validated]); // Convert to list?
+                } else {
+                    rejectedChoices.add(possibleInt);
+                }
+            }else {
+                rejectedChoices.add(possibleInt);
+            }
+        }
+        if(!rejectedChoices.isEmpty()) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Invalid Selection: ");
+            for (int i = 0; i < rejectedChoices.size(); i++) {
+                stringBuilder.append(rejectedChoices.get(i));
+                if (i < rejectedChoices.size() - 1) stringBuilder.append(", ");
+            }
+            System.out.println(stringBuilder);
+        }
+        return safeChoices;
+    }
+    public ArrayList<Sorters> askForAlgorithms(){
+        ArrayList<Sorters> choices = new ArrayList<>();
+        while (choices.isEmpty()) {
+            System.out.print("> "); // TODO HIGH not selecting or outputting rejects
+            choices = validateIntegers(inputScanner.nextLine());
+        }
+        return choices;
+    }
+
+    public void getSingleAlgorithmChoiceFromUser(){ // TODO allow more then once algorithm choice with 0,0,0,0 csv style input.
         do{
             System.out.print("> ");
             String userInput = inputScanner.nextLine();
             if(validInt(userInput) && userInput.length() <= algoEnumValues.length){
                 int validated = Integer.parseInt(userInput);
                 if(validated >= algoEnumValues[0].ordinal() && validated <= algoEnumValues[algoEnumValues.length - 1].ordinal()){
-                    userAlgorithmChoice = algoEnumValues[validated];
+                    userAlgorithmChoice = algoEnumValues[validated]; // Convert to list?
                     break;
                 } else System.out.println("Invalid Selection!");
             }else System.out.println("Invalid Selection!");

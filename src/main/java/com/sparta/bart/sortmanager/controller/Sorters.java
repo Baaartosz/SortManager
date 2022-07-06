@@ -1,9 +1,11 @@
-package com.sparta.sortmanager;
+package com.sparta.bart.sortmanager.controller;
+
+import com.sparta.bart.sortmanager.model.*;
 
 /**
- * Enum Factory Pattern
- */
-public enum Algorithms {
+ * Enum Factory of Sorters
+ * */
+public enum Sorters {
     BUBBLE_SORT("Bubble Sort") {
         @Override
         public Sorter getSorter(){
@@ -20,37 +22,26 @@ public enum Algorithms {
         @Override
         public Sorter getSorter() { return new BinarySort(); }
     },
-    QUICK_SORT("Quick Sort (Not Implemented)") {
+    QUICK_SORT("Quick Sort") {
         @Override
         public Sorter getSorter(){
             return new QuickSort();
         }
     },
-    INSERTION_SORT("Insertion Sort (Not Implemented)") {
+    INSERTION_SORT("Insertion Sort") {
         @Override
         public Sorter getSorter(){
             return new InsertionSort();
         }
     };
 
-    /*
-     * DONE Bubble Sort
-     * TODO Binary Sort
-     * TODO Insertion Sort
-     * DONE Merge Sort
-     * TODO Quick Sort
-     */
-
     private String name;
-
     public String getName() {
         return name;
     }
-
-    Algorithms(String algoName) {
+    Sorters(String algoName) {
         name = algoName;
     }
-
     public abstract Sorter getSorter();
 }
 

@@ -1,4 +1,4 @@
-package com.sparta.sortmanager;
+package com.sparta.bart.sortmanager.model;
 
 public class BubbleSort implements Sorter {
 
@@ -13,7 +13,7 @@ public class BubbleSort implements Sorter {
      * @return        sorted array of integers.
      */
     public int[] sortArray(int[] array){
-        if(array == null) return new int[] {};
+        if(array == null) return new int[] {-1};
 
         for (int outer = 0; outer < array.length - 1; outer++) {
             boolean swapped = false;
