@@ -12,7 +12,7 @@ public class SortManager {
         ui.title();
         do {
             ui.displayAlgorithms();
-
+            // TODO cleanup user-interface functions.
             var algorithmsChosen =  ui.askForAlgorithms();
             ui.getArraySizeFromUser();
 

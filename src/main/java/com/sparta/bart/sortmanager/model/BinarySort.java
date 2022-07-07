@@ -5,4 +5,9 @@ public class BinarySort implements Sorter {
     public int[] sortArray(int[] arrayToSort) {
         return new int[] {-1};
     }
+
+    class Node<T> {
+        T data;
+
+    }
 }

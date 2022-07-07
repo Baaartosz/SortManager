@@ -82,13 +82,13 @@ public class UserInterface {
     public ArrayList<Sorters> askForAlgorithms(){
         ArrayList<Sorters> choices = new ArrayList<>();
         while (choices.isEmpty()) {
-            System.out.print("> "); // TODO HIGH not selecting or outputting rejects
+            System.out.print("> ");
             choices = validateIntegers(inputScanner.nextLine());
         }
         return choices;
     }
 
-    public void getSingleAlgorithmChoiceFromUser(){ // TODO allow more then once algorithm choice with 0,0,0,0 csv style input.
+    public void getSingleAlgorithmChoiceFromUser(){
         do{
             System.out.print("> ");
             String userInput = inputScanner.nextLine();

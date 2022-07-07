@@ -2,7 +2,6 @@ package com.sparta.bart.sortmanager.controller;
 
 import java.util.concurrent.TimeUnit;
 public class Timer {
-
     private long timeTaken = -1;
     private long startTime;
 

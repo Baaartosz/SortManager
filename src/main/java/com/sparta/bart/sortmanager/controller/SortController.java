@@ -40,8 +40,8 @@ public class SortController {
     public void sortArray(){
         fillArray();
         for (Sorters s : algorithms) {
-            performanceTimer.start();
-            sortedArray = s.getSorter().sortArray(unsortedArray.clone());
+            performanceTimer.start(); // TODO create custom exception for invalid array return.
+            sortedArray = s.getSorter().sortArray(unsortedArray.clone()); // FIXME -1 when unimplemented
             performanceTimer.end();
             timeReports.add(performanceTimer.getTimeTaken());
         }
