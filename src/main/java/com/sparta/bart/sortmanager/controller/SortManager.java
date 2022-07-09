@@ -1,10 +1,13 @@
-package com.sparta.bart.sortmanager;
+package com.sparta.bart.sortmanager.controller;
 
-import com.sparta.bart.sortmanager.controller.SortController;
 import com.sparta.bart.sortmanager.view.SortView;
 import com.sparta.bart.sortmanager.view.UserInterface;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SortManager {
+
+    private static final Logger logger = LogManager.getLogger(SortManager.class);
     public static void start(){
         UserInterface ui = new UserInterface();
         SortView view = new SortView();

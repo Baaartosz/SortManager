@@ -1,6 +1,6 @@
 package com.sparta.bart.sortmanager;
 
-import com.sparta.bart.sortmanager.model.QuickSort;
+import com.sparta.bart.sortmanager.model.sorters.QuickSort;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -32,7 +32,7 @@ class QuickSortTest {
     @Test
     @DisplayName("int[0]")
     void sortEmpty() {
-        Assertions.assertArrayEquals(new int[] {-1}, quickSort.sortArray(empty));
+        Assertions.assertArrayEquals(new int[0], quickSort.sortArray(empty));
     }
 
     @Test

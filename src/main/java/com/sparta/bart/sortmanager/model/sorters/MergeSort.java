@@ -1,4 +1,6 @@
-package com.sparta.bart.sortmanager.model;
+package com.sparta.bart.sortmanager.model.sorters;
+
+import com.sparta.bart.sortmanager.model.Sorter;
 
 public class MergeSort implements Sorter {
     @Override

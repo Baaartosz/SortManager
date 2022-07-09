@@ -1,6 +1,7 @@
 package com.sparta.bart.sortmanager.controller;
 
 import com.sparta.bart.sortmanager.model.*;
+import com.sparta.bart.sortmanager.model.sorters.*;
 
 /**
  * Enum Factory of Sorters
@@ -18,7 +19,7 @@ public enum Sorters {
             return new MergeSort();
         }
     },
-    BINARY_SORT("Binary Sort (Not Implemented)") {
+    BINARY_SORT("Binary Sort") {
         @Override
         public Sorter getSorter() { return new BinarySort(); }
     },

@@ -70,7 +70,7 @@ public class UserInterface {
         }
         if(!rejectedChoices.isEmpty()) {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("Invalid Selection: ");
+            stringBuilder.append("Ignoring: ");
             for (int i = 0; i < rejectedChoices.size(); i++) {
                 stringBuilder.append(rejectedChoices.get(i));
                 if (i < rejectedChoices.size() - 1) stringBuilder.append(", ");

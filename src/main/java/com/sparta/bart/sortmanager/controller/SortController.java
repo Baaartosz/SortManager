@@ -1,28 +1,27 @@
 package com.sparta.bart.sortmanager.controller;
 
-import com.sparta.bart.sortmanager.model.Sorter;
 import com.sparta.bart.sortmanager.view.SortView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Random;
+
+// TODO maybe implement a 'Timable' interface. and use timer object via that. ?????
+// TODO!!! implement a non duplicate random fill interface and class implementing it.
 
 public class SortController {
     private final Timer performanceTimer = new Timer();
     private final SortView view;
-    private final ArrayList<Sorters> algorithms = new ArrayList<Sorters>();
-
-    private final int[] unsortedArray;
+    private final ArrayList<Sorters> algorithms = new ArrayList<>();
+    private final ArrayList<String> timeReports = new ArrayList<>();
+    private int[] unsortedArray;
     private int[] sortedArray;
 
-    private final ArrayList<String> timeReports = new ArrayList<>();
 
-    public SortController(Sorters sortingAlgorithm, int arraySize, SortView sortView){ // add view class.
-        algorithms.add(sortingAlgorithm);
-        unsortedArray = new int[arraySize];
-        sortedArray = new int[arraySize];
-        view = sortView;
-    }
+//    public SortController(Sorters sortingAlgorithm, int arraySize, SortView sortView){ // add view class.
+//        algorithms.add(sortingAlgorithm);
+//        unsortedArray = new int[arraySize];
+//        sortedArray = new int[arraySize];
+//        view = sortView;
+//    }
 
     public SortController(ArrayList<Sorters> sortingAlgorithms, int arraySize, SortView sortView){ // add view class
         algorithms.addAll(sortingAlgorithms);
@@ -31,18 +30,19 @@ public class SortController {
         view = sortView;
     }
 
-    private void fillArray(){
-        Random rand = new Random();
-        for (int i = 0; i < unsortedArray.length; i++)
-            unsortedArray[i] = rand.nextInt(99999);
+    private void fillArray(){ // TODO move to separate class ( S ) single responsibility
+        RandomArray randomArray = new RandomArray();
+        unsortedArray = randomArray.generateArray(sortedArray.length);
     }
 
     public void sortArray(){
         fillArray();
         for (Sorters s : algorithms) {
             performanceTimer.start(); // TODO create custom exception for invalid array return.
-            sortedArray = s.getSorter().sortArray(unsortedArray.clone()); // FIXME -1 when unimplemented
+            var array = s.getSorter().sortArray(unsortedArray.clone());
             performanceTimer.end();
+
+            sortedArray = array;
             timeReports.add(performanceTimer.getTimeTaken());
         }
     }
