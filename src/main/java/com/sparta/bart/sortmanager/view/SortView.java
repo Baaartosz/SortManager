@@ -1,5 +1,6 @@
 package com.sparta.bart.sortmanager.view;
 
+import com.sparta.bart.sortmanager.controller.SortManager;
 import com.sparta.bart.sortmanager.controller.Sorters;
 
 import java.util.ArrayList;
@@ -12,5 +13,7 @@ public class SortView {
         for (int i = 0; i < testTimes.size(); i++) {
             System.out.println(sorters.get(i).getName() + " --> " + testTimes.get(i));
         }
+        SortManager.LOGGER.debug(Arrays.toString(sorters.toArray()));
+        SortManager.LOGGER.debug(Arrays.toString(testTimes.toArray()));
     }
 }

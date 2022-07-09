@@ -8,10 +8,9 @@ import org.apache.logging.log4j.Logger;
 import java.util.Arrays;
 
 public class SortManager{
-
-    public static final Logger LOGGER = LogManager.getLogger("Sort Manager");
+    public static final Logger LOGGER = LogManager.getLogger("SortManager");
     public static void start(){
-        SortManager.LOGGER.info("Starting up application");
+        LOGGER.info("SortManager --> start()");
         UserInterface ui = new UserInterface();
         SortView view = new SortView();
 
@@ -33,6 +32,6 @@ public class SortManager{
             controller.printReport();
 
         } while(ui.doesUserWantToContinue());
-        LOGGER.info("Ending Application.");
+        LOGGER.info("SortManager --> shutting down");
     }
 }

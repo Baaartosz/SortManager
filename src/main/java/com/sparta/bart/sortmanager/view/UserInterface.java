@@ -4,6 +4,7 @@ import com.sparta.bart.sortmanager.controller.SortManager;
 import com.sparta.bart.sortmanager.controller.Sorters;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -42,18 +43,19 @@ public class UserInterface {
         // Convert list of integers into valid algorithm choices.
         var splitString = str.split(",");
         for (String possibleInt: splitString) {
-            if(validInt(possibleInt) && possibleInt.length() <= algoEnumValues.length){
+            // Valid format and integer.
+            if(validInt(possibleInt) && possibleInt.length() <= algoEnumValues.length && possibleInt.charAt(0) != '0'){
                 int validated = Integer.parseInt(possibleInt);
+                // Check if valid integer then check if it connects to corresponds to a algorithm.
                 if(validated >= algoEnumValues[0].ordinal() && validated <= algoEnumValues[algoEnumValues.length - 1].ordinal()){
                     safeChoices.add(algoEnumValues[validated]); // Convert to list?
                 } else {
-                    SortManager.LOGGER.info("Rejecting input --> " + possibleInt);
                     rejectedChoices.add(possibleInt);
                 }
             }else {
-                SortManager.LOGGER.info("Rejecting input --> " + possibleInt);
                 rejectedChoices.add(possibleInt);
             }
+            SortManager.LOGGER.debug("Accepted input --> " + Arrays.toString(safeChoices.toArray()));
         }
 
         // Showcase rejected input to user.
@@ -65,7 +67,7 @@ public class UserInterface {
                 if (i < rejectedChoices.size() - 1) stringBuilder.append(", ");
             }
             System.out.println(stringBuilder);
-            SortManager.LOGGER.info("Rejecting non-valid input --> " + stringBuilder.replace(0,9,""));
+            SortManager.LOGGER.debug("Rejected input --> " + Arrays.toString(rejectedChoices.toArray()));
         }
         return safeChoices;
     }
@@ -103,20 +105,20 @@ public class UserInterface {
     }
 
     public int getArraySizeFromUser(){
-        System.out.println("\nPlease enter the size of the array.\nBetween 4 to 50,000");
+        System.out.println("\nPlease enter the size of the array.\nBetween 4 to 500,000");
         do{
             System.out.print("> ");
             String userInput = inputScanner.nextLine();
             if(validInt(userInput) && userInput.length() <= 10){
                 int validated = Integer.parseInt(userInput);
-                if(validated >= 4 && validated <= 50000) {
+                if(validated >= 4 && validated <= 500000) {
                     return validated;
                 } else {
-                    SortManager.LOGGER.info("Rejecting validated input --> " + validated);
+                    SortManager.LOGGER.info("Rejecting validated input --> '" + validated + "'");
                     System.out.println("Array size is invalid! (Enter a number above or equal to 4)");
                 }
             } else {
-                SortManager.LOGGER.info("Rejecting user input --> " + userInput);
+                SortManager.LOGGER.info("Rejecting user input --> '" + userInput + "'");
                 System.out.println("Array size is invalid! (Enter a number above or equal to 4)");
             }
         }while(true);

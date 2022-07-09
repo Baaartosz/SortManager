@@ -3,6 +3,7 @@ package com.sparta.bart.sortmanager.controller;
 import com.sparta.bart.sortmanager.view.SortView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SortController {
     private final Timer performanceTimer = new Timer();
@@ -21,27 +22,30 @@ public class SortController {
 
     protected void fillArray(){
         RandomArray randomArray = new RandomArray();
-        SortManager.LOGGER.info("Filling array with random integers");
+        SortManager.LOGGER.debug("Filling array with random integers");
         unsortedArray = randomArray.generateArray(sortedArray.length);
     }
 
-    public void sortArray(){
+    public void sortArray(){ // TODO Singleton Logger Static -> implements interface Loggable
         fillArray();
         for (Sorters s : algorithms) {
-            SortManager.LOGGER.debug(s.getName() + " running sort...");
+            SortManager.LOGGER.info(s.getName() + " running sort...");
             performanceTimer.start();
 
             try {
                 sortedArray = s.getSorter().sortArray(unsortedArray.clone());
                 performanceTimer.end();
-                SortManager.LOGGER.debug(s.getName() + " finished sort!");
+                SortManager.LOGGER.info(s.getName() + " finished sort!");
             }catch (StackOverflowError stackOverflowError){
-                SortManager.LOGGER.fatal("StackOverflow inside " + s.getName() + ", size(" + sortedArray.length + ")");
+                System.err.println(s.getName() + " failed --> ran out of memory. Please increase memory to JVM.");
+                SortManager.LOGGER.fatal("StackOverflow inside " + s.getName() + "\n" + stackOverflowError.getStackTrace()[0]);
                 performanceTimer.reset();
                 sortedArray = new int[0];
+            }catch(Exception e){
+                SortManager.LOGGER.fatal(e.getStackTrace());
             }
 
-            if(sortedArray.length == 0) SortManager.LOGGER.warn(s.getName() + " failed to sort array. ");
+            if(sortedArray.length == 0) SortManager.LOGGER.error(s.getName() + " failed to sort array. ");
             timeReports.add(performanceTimer.getTimeTaken());
         }
     }
