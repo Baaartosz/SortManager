@@ -1,14 +1,18 @@
 package com.sparta.bart.sortmanager.model.sorters;
 
+import com.sparta.bart.sortmanager.controller.SortManager;
 import com.sparta.bart.sortmanager.model.Sorter;
 
 public class MergeSort implements Sorter {
     @Override
-    public int[] sortArray(int[] arrayToSort) {
-        if(arrayToSort == null) return new int[] {-1};
+    public int[] sortArray(int[] array) {
+        if(array == null)  {
+            SortManager.LOGGER.error("Null Array provided for Sort. Returning empty array.");
+            return new int[0];
+        }
 
-        int[] workArray = arrayToSort.clone();
-        topDownSplitMerge(workArray, 0, arrayToSort.length, arrayToSort);
+        int[] workArray = array.clone();
+        topDownSplitMerge(workArray, 0, array.length, array);
 
         return workArray;
     }

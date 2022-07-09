@@ -1,12 +1,16 @@
 package com.sparta.bart.sortmanager.model.sorters;
 
+import com.sparta.bart.sortmanager.controller.SortManager;
 import com.sparta.bart.sortmanager.model.Sorter;
 
 public class QuickSort implements Sorter {
     @Override
-    public int[] sortArray(int[] arrayToSort) {
-        if(arrayToSort == null) return new int[] {-1};
-        return quickSort(arrayToSort,0,arrayToSort.length-1);
+    public int[] sortArray(int[] array) {
+        if(array == null)  {
+            SortManager.LOGGER.error("Null Array provided for Sort. Returning empty array.");
+            return new int[0];
+        }
+        return quickSort(array,0,array.length-1);
     }
 
     private int[] quickSort(int[] array, int leftMost, int rightMost ){

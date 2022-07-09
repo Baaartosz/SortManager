@@ -5,21 +5,27 @@ import com.sparta.bart.sortmanager.view.UserInterface;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class SortManager {
+import java.util.Arrays;
 
-    private static final Logger logger = LogManager.getLogger(SortManager.class);
+public class SortManager{
+
+    public static final Logger LOGGER = LogManager.getLogger("Sort Manager");
     public static void start(){
+        SortManager.LOGGER.info("Starting up application");
         UserInterface ui = new UserInterface();
         SortView view = new SortView();
 
         ui.title();
         do {
             ui.displayAlgorithms();
-            // TODO cleanup user-interface functions.
-            var algorithmsChosen =  ui.askForAlgorithms();
-            ui.getArraySizeFromUser();
 
-            SortController controller = new SortController(algorithmsChosen, ui.getArraySize(), view);
+            var algorithmsChosen =  ui.askForAlgorithms();
+            var arraySize = ui.getArraySizeFromUser();
+
+            LOGGER.debug("Algorithms chosen by the user -> " + Arrays.toString(algorithmsChosen.toArray()));
+            LOGGER.debug("Array size chosen by user -> " + arraySize);
+
+            SortController controller = new SortController(algorithmsChosen, arraySize, view);
 
             ui.informUserOfArraySorting();
 
@@ -27,5 +33,6 @@ public class SortManager {
             controller.printReport();
 
         } while(ui.doesUserWantToContinue());
+        LOGGER.info("Ending Application.");
     }
 }

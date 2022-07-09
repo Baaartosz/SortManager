@@ -1,5 +1,6 @@
 package com.sparta.bart.sortmanager.model.sorters;
 
+import com.sparta.bart.sortmanager.controller.SortManager;
 import com.sparta.bart.sortmanager.model.Sorter;
 
 public class BubbleSort implements Sorter {
@@ -15,7 +16,10 @@ public class BubbleSort implements Sorter {
      * @return        sorted array of integers.
      */
     public int[] sortArray(int[] array){
-        if(array == null) return new int[] {-1};
+        if(array == null)  {
+            SortManager.LOGGER.error("Null Array provided for Sort. Returning empty array.");
+            return new int[0];
+        }
 
         for (int outer = 0; outer < array.length - 1; outer++) {
             boolean swapped = false;

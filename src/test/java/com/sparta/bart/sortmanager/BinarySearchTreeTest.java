@@ -13,11 +13,6 @@ class BinarySearchTreeTest {
 
     private BinarySearchTree bst;
 
-    @BeforeEach
-    void setUp() {
-
-    }
-
     @Test
     void getTree() {
         //System.out.println(Arrays.toString(small));

@@ -1,8 +1,8 @@
 package com.sparta.bart.sortmanager.view;
 
+import com.sparta.bart.sortmanager.controller.SortManager;
 import com.sparta.bart.sortmanager.controller.Sorters;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,25 +10,9 @@ public class UserInterface {
     private final Scanner inputScanner = new Scanner(System.in);
     private final Sorters[] algoEnumValues = Sorters.values();
 
-    private Sorters userAlgorithmChoice;
-
-    public Sorters getAlgorithmChoice() {
-        return userAlgorithmChoice;
-    }
-
-    private int arraySize;
-
-    public int getArraySize() {
-        return arraySize;
-    }
-
     public void title(){
         String PROGRAM_TITLE = "\n   ____         __    __  ___                           \n  / __/__  ____/ /_  /  |/  /__ ____  ___ ____ ____ ____\n _\\ \\/ _ \\/ __/ __/ / /|_/ / _ `/ _ \\/ _ `/ _ `/ -_) __/\n/___/\\___/_/  \\__/ /_/  /_/\\_,_/_//_/\\_,_/\\_, /\\__/_/   \n   Developed by Bartosz                  /___/          ";
         System.out.println(PROGRAM_TITLE);
-    }
-
-    public void informUserOfArrayFilling(){
-        System.out.println("\nRandomly filling array with " + arraySize + " integers.");
     }
 
     public void informUserOfArraySorting(){
@@ -55,6 +39,7 @@ public class UserInterface {
         var safeChoices = new ArrayList<Sorters>();
         var rejectedChoices = new ArrayList<String>();
 
+        // Convert list of integers into valid algorithm choices.
         var splitString = str.split(",");
         for (String possibleInt: splitString) {
             if(validInt(possibleInt) && possibleInt.length() <= algoEnumValues.length){
@@ -62,12 +47,16 @@ public class UserInterface {
                 if(validated >= algoEnumValues[0].ordinal() && validated <= algoEnumValues[algoEnumValues.length - 1].ordinal()){
                     safeChoices.add(algoEnumValues[validated]); // Convert to list?
                 } else {
+                    SortManager.LOGGER.info("Rejecting input --> " + possibleInt);
                     rejectedChoices.add(possibleInt);
                 }
             }else {
+                SortManager.LOGGER.info("Rejecting input --> " + possibleInt);
                 rejectedChoices.add(possibleInt);
             }
         }
+
+        // Showcase rejected input to user.
         if(!rejectedChoices.isEmpty()) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Ignoring: ");
@@ -76,6 +65,7 @@ public class UserInterface {
                 if (i < rejectedChoices.size() - 1) stringBuilder.append(", ");
             }
             System.out.println(stringBuilder);
+            SortManager.LOGGER.info("Rejecting non-valid input --> " + stringBuilder.replace(0,9,""));
         }
         return safeChoices;
     }
@@ -87,20 +77,20 @@ public class UserInterface {
         }
         return choices;
     }
-
-    public void getSingleAlgorithmChoiceFromUser(){
-        do{
-            System.out.print("> ");
-            String userInput = inputScanner.nextLine();
-            if(validInt(userInput) && userInput.length() <= algoEnumValues.length){
-                int validated = Integer.parseInt(userInput);
-                if(validated >= algoEnumValues[0].ordinal() && validated <= algoEnumValues[algoEnumValues.length - 1].ordinal()){
-                    userAlgorithmChoice = algoEnumValues[validated]; // Convert to list?
-                    break;
-                } else System.out.println("Invalid Selection!");
-            }else System.out.println("Invalid Selection!");
-        }while(true);
-    }
+//
+//    public void getSingleAlgorithmChoiceFromUser(){
+//        do{
+//            System.out.print("> ");
+//            String userInput = inputScanner.nextLine();
+//            if(validInt(userInput) && userInput.length() <= algoEnumValues.length){
+//                int validated = Integer.parseInt(userInput);
+//                if(validated >= algoEnumValues[0].ordinal() && validated <= algoEnumValues[algoEnumValues.length - 1].ordinal()){
+//                    userAlgorithmChoice = algoEnumValues[validated]; // Convert to list?
+//                    break;
+//                } else System.out.println("Invalid Selection!");
+//            }else System.out.println("Invalid Selection!");
+//        }while(true);
+//    }
 
     private boolean validInt(String intString){
         if(intString == null || intString.length() == 0) return false;
@@ -112,20 +102,21 @@ public class UserInterface {
         return true;
     }
 
-    public void getArraySizeFromUser(){
-        System.out.println("\nPlease enter the size of the array.");
+    public int getArraySizeFromUser(){
+        System.out.println("\nPlease enter the size of the array.\nBetween 4 to 50,000");
         do{
             System.out.print("> ");
             String userInput = inputScanner.nextLine();
             if(validInt(userInput) && userInput.length() <= 10){
                 int validated = Integer.parseInt(userInput);
-                if(validated >= 4 && validated <= Integer.MAX_VALUE/4) {
-                    arraySize = validated;
-                    break;
+                if(validated >= 4 && validated <= 50000) {
+                    return validated;
                 } else {
+                    SortManager.LOGGER.info("Rejecting validated input --> " + validated);
                     System.out.println("Array size is invalid! (Enter a number above or equal to 4)");
                 }
             } else {
+                SortManager.LOGGER.info("Rejecting user input --> " + userInput);
                 System.out.println("Array size is invalid! (Enter a number above or equal to 4)");
             }
         }while(true);

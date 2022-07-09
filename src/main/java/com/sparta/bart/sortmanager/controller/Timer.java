@@ -10,6 +10,7 @@ public class Timer {
         long ms = TimeUnit.NANOSECONDS.toMillis(timeTaken);
         long micro = TimeUnit.NANOSECONDS.toMicros(timeTaken);
 
+        if(timeTaken == -1) return "Failed";
         if(micro < 9999) return micro + " microsecond(s)";
         else if(ms < 999) return ms + " millisecond(s)";
         return s + " second(s)";
@@ -22,5 +23,9 @@ public class Timer {
     public void end(){
         timeTaken = (System.nanoTime() - startTime);
         startTime = 0;
+    }
+
+    public void reset(){
+        timeTaken = -1;
     }
 }

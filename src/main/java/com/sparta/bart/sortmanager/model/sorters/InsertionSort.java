@@ -1,14 +1,17 @@
 package com.sparta.bart.sortmanager.model.sorters;
 
+import com.sparta.bart.sortmanager.controller.SortManager;
 import com.sparta.bart.sortmanager.model.Sorter;
 
 public class InsertionSort implements Sorter {
     @Override
     public int[] sortArray(int[] array) {
-        if(array == null) return new int[] {-1};
-        int size = array.length;
+        if(array == null)  {
+            SortManager.LOGGER.error("Null Array provided for Sort. Returning empty array.");
+            return new int[0];
+        }
 
-        for (int step = 1; step < size; step++) {
+        for (int step = 1; step < array.length; step++) {
             int key = array[step];
             int j = step - 1;
 
