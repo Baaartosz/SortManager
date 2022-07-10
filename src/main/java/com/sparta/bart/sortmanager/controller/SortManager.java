@@ -1,37 +1,36 @@
 package com.sparta.bart.sortmanager.controller;
 
 import com.sparta.bart.sortmanager.view.SortView;
-import com.sparta.bart.sortmanager.view.UserInterface;
+import com.sparta.bart.sortmanager.view.ConsoleView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 
-public class SortManager{
+public class SortManager {
     public static final Logger LOGGER = LogManager.getLogger("SortManager");
     public static void start(){
         LOGGER.info("SortManager --> start()");
-        UserInterface ui = new UserInterface();
+        ConsoleView consoleView = new ConsoleView();
         SortView view = new SortView();
 
-        ui.title();
+        consoleView.title();
         do {
-            ui.displayAlgorithms();
+            consoleView.displayAlgorithms();
 
-            var algorithmsChosen =  ui.askForAlgorithms();
-            var arraySize = ui.getArraySizeFromUser();
+            var algorithmsChosen =  consoleView.askForAlgorithms();
+            var arraySize = consoleView.askForArray();
 
             LOGGER.debug("Algorithms chosen by the user -> " + Arrays.toString(algorithmsChosen.toArray()));
             LOGGER.debug("Array size chosen by user -> " + arraySize);
 
             SortController controller = new SortController(algorithmsChosen, arraySize, view);
-
-            ui.informUserOfArraySorting();
+            consoleView.informUserOfArraySorting();
 
             controller.sortArray();
             controller.printReport();
 
-        } while(ui.doesUserWantToContinue());
+        } while(consoleView.doesUserWantToContinue());
         LOGGER.info("SortManager --> shutting down");
     }
 }

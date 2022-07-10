@@ -26,7 +26,7 @@ public class SortController {
         unsortedArray = randomArray.generateArray(sortedArray.length);
     }
 
-    public void sortArray(){ // TODO Singleton Logger Static -> implements interface Loggable
+    public void sortArray(){
         fillArray();
         for (Sorters s : algorithms) {
             SortManager.LOGGER.info(s.getName() + " running sort...");

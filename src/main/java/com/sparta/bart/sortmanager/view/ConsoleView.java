@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class UserInterface {
+public class ConsoleView {
     private final Scanner inputScanner = new Scanner(System.in);
     private final Sorters[] algoEnumValues = Sorters.values();
 
@@ -42,11 +42,12 @@ public class UserInterface {
 
         // Convert list of integers into valid algorithm choices.
         var splitString = str.split(",");
+
         for (String possibleInt: splitString) {
             // Valid format and integer.
-            if(validInt(possibleInt) && possibleInt.length() <= algoEnumValues.length && possibleInt.charAt(0) != '0'){
+            if(isValidInt(possibleInt) && possibleInt.length() <= algoEnumValues.length){
                 int validated = Integer.parseInt(possibleInt);
-                // Check if valid integer then check if it connects to corresponds to a algorithm.
+                // Check if valid integer then check if it connects to correspond to an algorithm.
                 if(validated >= algoEnumValues[0].ordinal() && validated <= algoEnumValues[algoEnumValues.length - 1].ordinal()){
                     safeChoices.add(algoEnumValues[validated]); // Convert to list?
                 } else {
@@ -79,22 +80,8 @@ public class UserInterface {
         }
         return choices;
     }
-//
-//    public void getSingleAlgorithmChoiceFromUser(){
-//        do{
-//            System.out.print("> ");
-//            String userInput = inputScanner.nextLine();
-//            if(validInt(userInput) && userInput.length() <= algoEnumValues.length){
-//                int validated = Integer.parseInt(userInput);
-//                if(validated >= algoEnumValues[0].ordinal() && validated <= algoEnumValues[algoEnumValues.length - 1].ordinal()){
-//                    userAlgorithmChoice = algoEnumValues[validated]; // Convert to list?
-//                    break;
-//                } else System.out.println("Invalid Selection!");
-//            }else System.out.println("Invalid Selection!");
-//        }while(true);
-//    }
 
-    private boolean validInt(String intString){
+    private boolean isValidInt(String intString){
         if(intString == null || intString.length() == 0) return false;
         for(char c : intString.toCharArray()){
             if(c < '0' || c > '9'){
@@ -104,12 +91,12 @@ public class UserInterface {
         return true;
     }
 
-    public int getArraySizeFromUser(){
+    public int askForArray(){
         System.out.println("\nPlease enter the size of the array.\nBetween 4 to 500,000");
         do{
             System.out.print("> ");
             String userInput = inputScanner.nextLine();
-            if(validInt(userInput) && userInput.length() <= 10){
+            if(isValidInt(userInput) && userInput.length() <= 10){
                 int validated = Integer.parseInt(userInput);
                 if(validated >= 4 && validated <= 500000) {
                     return validated;
